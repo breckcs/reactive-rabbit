@@ -4,7 +4,7 @@ sonatypeSettings
 
 name := "reactive-rabbit"
 
-version := "1.1.2"
+version := "1.2.0"
 
 organization := "io.scalac"
 

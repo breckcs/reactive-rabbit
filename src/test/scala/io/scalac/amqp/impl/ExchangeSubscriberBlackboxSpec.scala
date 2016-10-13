@@ -9,6 +9,7 @@ import org.reactivestreams.tck.{SubscriberBlackboxVerification, TestEnvironment}
 import org.scalatest.testng.TestNGSuiteLike
 import org.testng.annotations.AfterSuite
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 class ExchangeSubscriberBlackboxSpec(defaultTimeout: FiniteDuration) extends SubscriberBlackboxVerification[Routed](

@@ -7,10 +7,9 @@ import io.scalac.amqp._
 import org.reactivestreams.{Subscriber, Subscription}
 
 import scala.collection.JavaConversions._
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.{Future, blocking}
+import scala.concurrent.{ExecutionContext, Future, blocking}
 
-private[amqp] class RabbitConnection(settings: ConnectionSettings) extends Connection {
+private[amqp] class RabbitConnection(settings: ConnectionSettings)(implicit ec: ExecutionContext) extends Connection {
   val factory = Conversions.toConnectionFactory(settings)
   val isAutoRecovering = settings.automaticRecovery
   val addresses: Array[Address] = settings.addresses.map(address ⇒

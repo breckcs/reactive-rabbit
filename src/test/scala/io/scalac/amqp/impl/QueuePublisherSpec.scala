@@ -9,6 +9,7 @@ import org.reactivestreams.{Publisher, Subscriber, Subscription}
 import org.scalatest.testng.TestNGSuiteLike
 
 import scala.concurrent.Await
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 /** You need to have RabbitMQ server to run these tests.

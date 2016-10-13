@@ -22,6 +22,8 @@ import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Sink, Source}
 import io.scalac.amqp.Connection
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 
 // streaming invoices to Accounting Department
 val connection = Connection()

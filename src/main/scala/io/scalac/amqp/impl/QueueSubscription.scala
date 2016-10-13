@@ -7,13 +7,13 @@ import org.reactivestreams.{Subscriber, Subscription}
 
 import scala.annotation.tailrec
 import scala.collection.immutable.Queue
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.stm.{Ref, atomic}
 import scala.util.control.NonFatal
 
 
 private[amqp] class QueueSubscription(channel: Channel, queue: String, subscriber: Subscriber[_ >: Delivery])
+                                     (implicit ec: ExecutionContext)
   extends DefaultConsumer(channel) with Subscription {
 
   val demand = Ref(0L)

@@ -9,12 +9,11 @@ import org.reactivestreams.{Subscriber, Subscription}
 
 import scala.annotation.tailrec
 import scala.collection.immutable.Queue
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.stm.{Ref, atomic}
 import scala.util.control.NonFatal
 
-private[amqp] class ExchangeSubscriber(channel: Channel, exchange: String)
+private[amqp] class ExchangeSubscriber(channel: Channel, exchange: String)(implicit ec: ExecutionContext)
   extends Subscriber[Routed] {
   require(exchange.length <= 255, "exchange.length > 255")
 

@@ -4,6 +4,7 @@ import com.rabbitmq.client.{Connection, ShutdownListener, ShutdownSignalExceptio
 import io.scalac.amqp.Delivery
 import org.reactivestreams.{Publisher, Subscriber}
 
+import scala.concurrent.ExecutionContext
 import scala.concurrent.stm.Ref
 import scala.util.control.NonFatal
 import scala.util.{Failure, Success, Try}
@@ -19,7 +20,8 @@ private[amqp] class QueuePublisher(
   /** Number of unacknowledged messages in the flight. It's beneficial to have this number higher
     * than 1 due to improved throughput. Setting this number to high may increase memory usage -
     * depending on average message size and speed of subscribers. */
-  prefetch: Int = 20) extends Publisher[Delivery] {
+  prefetch: Int = 20)
+  (implicit ec: ExecutionContext) extends Publisher[Delivery] {
 
   require(prefetch > 0, "prefetch <= 0")
 

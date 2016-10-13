@@ -4,17 +4,17 @@ import com.typesafe.config.{Config, ConfigFactory}
 import io.scalac.amqp.impl.RabbitConnection
 import org.reactivestreams.{Publisher, Subscriber}
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 
 object Connection {
-  def apply(): Connection =
+  def apply()(implicit ec: ExecutionContext): Connection =
     apply(ConfigFactory.load())
 
-  def apply(config: Config): Connection =
+  def apply(config: Config)(implicit ec: ExecutionContext): Connection =
     apply(ConnectionSettings(config))
 
-  def apply(settings: ConnectionSettings): Connection =
+  def apply(settings: ConnectionSettings)(implicit ec: ExecutionContext): Connection =
     new RabbitConnection(settings)
 }
 
